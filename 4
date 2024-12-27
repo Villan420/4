@@ -1,165 +1,286 @@
-#include<stdio.h> 
+<!DOCTYPE html>
 
-#define INFINITY 99 
+<html lang="en">
 
-void dijkstra(int); 
+<head>
 
-void printpath(int); 
+ <title>Registration Form</title>
 
-int MinVertex(); 
+ <style>
 
-int dist[10],p[10],visit[10]; 
+ body {
 
-int wt[10][10], n, edge; 
+ font-family: Arial, sans-serif;
 
-int main() 
+ background-color: #f0f0f0;
 
-{ 
+ margin: 0;
 
-int i,j,s; 
+ padding: 20px;
 
-printf("\n Enter the number of vertices in a graph : "); 
+ }
 
-scanf("%d",&n); 
+ h1 {
 
-for( i=1;i<=n;i++) 
+ color: #333;
 
-{ 
+ text-align: center;
 
-dist[i]=0; p[i]=0; visit[i]=0; 
+ }
 
-} 
+ table {
 
-printf("\n Enter the weight matrix? \n"); 
+ width: 100%;
 
-for( i=1;i<=n;i++) 
+ max-width: 600px;
 
-for(j=1;j<=n;j++) 
+ margin: 0 auto;
 
-scanf("%d",&wt[i][j]); 
+ background-color: #fff;
 
-printf("\n enter the source vertex: "); 
+ padding: 20px;
 
-scanf("%d",&s); 
+ border-radius: 8px;
 
-printf("\n\n Shortest paths from vertex %d are\n\n",s); 
+ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
-dijkstra(s); 
+ }
 
-printpath(s); 
+ td {
 
-return 0; 
+ padding: 10px;
 
-} 
+ }
 
-void dijkstra(int s) 
+ label {
 
-{ 
-int i,j,step,u; 
+color: #555;
 
-for(i=1;i<=n;i++) 
+ font-weight: bold;
+}
 
-{ 
+ input[type="text"], input[type="email"], input[type="password"], select, textarea {
 
-dist[i] = wt[s][i]; 
+ width: 100%;
 
-if(dist[i] ==INFINITY) 
+ padding: 8px;
 
-p[i]=0; 
+ border: 1px solid #ddd;
 
-else 
+ border-radius: 4px;
 
-p[i]=s; 
+ box-sizing: border-box;
 
-} 
+ font-size: 16px;
 
-visit[s]=1; 
+ }
 
-dist[s]=0; 
+ input[type="radio"], input[type="checkbox"] {
 
-for(step=2;step<=n;step++) 
+ margin-right: 5px;
 
-{ 
+ }
 
-u=MinVertex(); 
+ input[type="submit"] {
 
-visit[u]=1; 
+ background-color: #4CAF50;
 
-for(j=1;j<=n;j++) 
+ color: white;
 
-if( ((dist[u]+wt[u][j]) < dist[j]) && !visit[j]) 
+ padding: 10px 20px;
 
-{ 
+ border: none;
 
-dist[j]=dist[u]+wt[u][j]; 
+ border-radius: 4px;
 
-p[j]=u; 
+ cursor: pointer;
 
-} 
+ font-size: 18px;
 
-} 
+ }
 
-} 
+ input[type="reset"] {
 
-int MinVertex() 
+ background-color: #FF0000;
 
-{ 
+ color: white;
 
-int min=INFINITY; 
+ padding: 10px 20px;
 
-int u,i; 
+ border: none;
 
-for(i=1;i<=n;i++) 
+ border-radius: 4px;
 
-{ 
+ cursor: pointer;
 
-if((dist[i]<min) && (visit[i]==0)) 
-{ 
-
-min=dist[i]; 
-
-u=i; 
-
-} 
-
-} 
-
-return u; 
-
-} 
-
-void printpath(int s) 
-
-{ 
-
-int i,t; 
-
-for(i=1;i<=n;i++) 
-
-if(visit[i]==1 && i!=s) 
-
-{ 
-
-printf("vertext->%d length:%d path: ",i,dist[i]); 
-
-t=p[i]; 
-
-printf("%d",i); 
-
-while(t!=s) 
-
-{ 
-
-printf("<--%d",t); 
-
-t=p[t]; 
-
-} 
-
-if(t==s) 
-
-printf("<--%d\n",s); 
-
-} 
+ font-size: 18px;
 
 }
+
+ input[type="submit"]:hover {
+
+ background-color: #45a049;
+
+ }
+
+ .error {
+
+ color: #ff0000;
+
+ font-size: 14px;
+
+ }
+
+ </style>
+
+</head>
+
+<body>
+
+ <h1>Registration Form</h1>
+
+ <form action="#" method="post">
+
+ <table>
+
+ <tr>
+<td><label for="fullname">Full Name:</label></td>
+
+ <td><input type="text" id="fullname" name="fullname" required></td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="email">Email:</label></td>
+
+ <td><input type="email" id="email" name="email" required></td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="password">Password:</label></td>
+
+ <td><input type="password" id="password" name="password" required></td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="confirm_password">Confirm Password:</label></td>
+
+ <td><input type="password" id="confirm_password" name="confirm_password"
+
+required></td>
+
+ </tr>
+
+ <tr>
+
+ <td><label>Gender:</label></td>
+
+ <td>
+
+ <input type="radio" id="male" name="gender" value="male" required>
+
+ <label for="male">Male</label>
+
+ <input type="radio" id="female" name="gender" value="female" required>
+
+ <label for="female">Female</label>
+
+ <input type="radio" id="other" name="gender" value="other" required>
+
+ <label for="other">Other</label>
+
+ </td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="birthdate">Date of Birth:</label></td>
+
+ <td><input type="date" id="birthdate" name="birthdate" required></td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="country">Country:</label></td>
+
+ <td>
+
+ <select id="country" name="country" required>
+
+ <option value="">Select a country</option>
+
+ <option value="usa">India</option>
+
+ <option value="uk">United Kingdom</option>
+
+ <option value="canada">Canada</option>
+
+ <option value="australia">Australia</option>
+
+ <option value="other">Other</option>
+
+ </select>
+
+ </td>
+
+ </tr>
+<tr>
+
+ <td><label for="interests">Interests:</label></td>
+
+ <td>
+
+<input type="checkbox" id="sports" name="interests[]" value="sports">
+
+ <label for="sports">Sports</label>
+
+ <input type="checkbox" id="music" name="interests[]" value="music">
+
+ <label for="music">Music</label>
+
+ <input type="checkbox" id="reading" name="interests[]" value="reading">
+
+ <label for="reading">Reading</label>
+
+ <input type="checkbox" id="travel" name="interests[]" value="travel">
+
+ <label for="travel">Travel</label>
+
+ </td>
+
+ </tr>
+
+ <tr>
+
+ <td><label for="bio">Bio:</label></td>
+
+ <td><textarea id="bio" name="bio" rows="4"></textarea></td>
+
+ </tr>
+
+ <tr>
+
+ <td colspan="2" style="text-align: center;">
+
+ <input type="submit" value="Register">
+
+ <input type="reset" value="Reset">
+
+ </td>
+
+ </tr>
+
+ </table>
+
+ </form>
+
+</body>
+
+</html>
