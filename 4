@@ -1,187 +1,28 @@
-App.js
+import pandas as pd
 
-import React, { useState } from 'react';
+def find_s_algorithm(file_path):
 
-import './App.css';
+df=pd.read_csv(file_path)
 
-function ToDoFunction() {
+print("columns in the dataset:",df.columns)
 
-// State to hold the list of tasks
+positive_examples=df[df.iloc[:,-1].str.lower()=='yes']
 
-const [tasks, setTasks] = useState([]);
+if positive_examples.empty
+print("<No positive examples found in the dataset:>")
 
-// State to hold the current input value for adding new tasks
+return
 
-const [newTask, setNewTask] = useState('');
+hypothesis=positive_examples.iloc[0,:-1].copy()
 
-// Function to handle adding a new task
+for index ,row in positive_examples.iterrows():
 
-const addTask = () => {
+for i in range(len(hypothesis)):
 
-if (newTask.trim() === '') return; // Don't add empty tasks
+if hypothesis.iloc[i]!=row.iloc[i]:
 
-const task = {
+hypothesis.iloc[i]='?'
 
- id: Date.now(),
+print("<"+",".join([f"{col}:{val}" for col,val in zip(df.columns[:-1],hypothesis)])+">")
 
- text: newTask,
-
- completed: false,
-
- };
-
- setTasks([...tasks, task]); // Add the new task to the list
-
- setNewTask(''); // Clear the input field
-
- };
-
-// Function to handle task completion toggle
-
-const toggleCompletion = (taskId) => {
-
- setTasks(
-
- tasks.map((task) =>
-
-task.id === taskId ? { ...task, completed: !task.completed } : task
-
- )
-
- );
-
- };
-// Function to handle deleting a task
-
-const deleteTask = (taskId) => {
-
- setTasks(tasks.filter((task) => task.id !== taskId));
-
- };
-
- return (
-
- <div className="todo-container">
-
- <h1>To-Do List</h1>
-
- <div>
-
- <input
-
- type="text"
-
- value={newTask}
-
- onChange={(e) => setNewTask(e.target.value)}
-
- placeholder="Add a new task"
-
- />
-
- <button onClick={addTask}>Add Task</button>
-
- </div>
-
- <ul>
-
- {tasks.map((task) => (
-
- <li key={task.id} className={task.completed ? 'completed' : ''}>
-
-<span
-
- style={{
-
- textDecoration: task.completed ? 'line-through' : 'none',
-
- }}
-
- onClick={() => toggleCompletion(task.id)}
-
- >
-
- {task.text}
-
- </span>
-
- <button onClick={() => deleteTask(task.id)}>Delete</button>
-
- </li>
-
- ))}
-
- </ul>
-
- </div>
-
- );
-
-}
-
-function App() {
-
- return (
-
- <div className="App">
-
- <ToDoFunction />
-
- </div>
-
- );
-
-}
-
-export default App;
-
-App.css
-
-.todo-container {
-
-text-align: center;
-
-padding: 20px;
-}
-
-input {
-
-padding: 10px;
-
-margin-right: 10px;
-
-}
-
-button {
-
-padding: 10px;
-
-cursor: pointer;
-
-}
-
-ul {
-
-list-style-type: none;
-
-padding: 0;
-
-}
-
-li {
-
-display: flex;
-
-justify-content: space-between;
-
-align-items: center;
-
-margin: 10px 0;
-
-}
-
-.completed {
-
-text-decoration: line-through;
-
-}
+find_s_algorithm('tennis.csv')
